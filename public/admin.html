@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <h3>Admin Dashboard</h3>
+
+    <h1>Add New Car</h1>
+    <form id="carForm" onsubmit="addCar(event)" method="POST">
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" required><br><br>
+    
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required><br><br>
+    
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required><br><br>
+    
+        <label for="license_plate">License Plate:</label>
+        <input type="text" id="license_plate" name="license_plate" required><br><br>
+    
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option value="1">Available</option>
+            <option value="0">Not Available</option>
+        </select><br><br>
+    
+        <label for="daily_rate">Daily Rate:</label>
+        <input type="number" id="daily_rate" name="daily_rate" step="0.01" required><br><br>
+    
+        <button type="submit" id="submitButton" onclick="dodajAuto()">Add Car</button>
+    </form>
+    <h2>Add New Customer</h2>
+    <form id="customerForm" onsubmit="addCustomer(event)">
+        <label for="FName">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+
+        <label for="LName">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="PNumber">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+
+        <label for="DLicense">Drivers License:</label>
+        <input type="text" id="drivers_license" name="drivers_license" required>
+        <button type="submit" id="submitButton1" onclick="adCustomer()">Add Customer</button>
+    </form>
+
+    <h2>Add New Rental</h2>
+    <form id="rentalForm" onsubmit="addRental(event)">
+        <label for="car_id">Choose a Car:</label>
+        <select name="car_id" id="carSelect" required>
+        </select><br><br>
+    
+        <label for="customer_id">Choose a Customer:</label>
+        <select name="customer_id" id="customerSelect" required>
+        </select><br><br>
+    
+        <label for="rental_date">Rental Date:</label>
+        <input type="date" name="rental_date" id="rental_date" required><br><br>
+    
+        <label for="return_date">Return Date:</label>
+        <input type="date" name="return_date" id="return_date"><br><br>
+    
+        <label for="total_cost">Total Cost:</label>
+        <input type="number" name="total_cost" id="total_cost" placeholder="Total Cost" required><br><br>
+    
+        <button type="submit" id="submitButton2">Add Rental</button>
+    </form>
+    
+    </form>
+    <h2>Cars</h2>
+    <table id="carTable"></table>
+
+    <h2>Customers</h2>
+    <table id="customerTable"></table>
+
+    <h2>Rentals</h2>
+    <table id="rentalTable"></table>
+</body>
+<script src="scriptadmin.js"></script>
+</html>

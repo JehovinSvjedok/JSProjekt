@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0; 
+            border: 1px solid #ddd;
+            border-radius: 10px; 
+            overflow: hidden; 
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .admin-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .admin-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Cars</h1>
+
+    <!-- Admin Button -->
+    <div class="button-container">
+        <a href="/admin" class="admin-button">Go to Admin Page</a>
+    </div>
+
+    <table id="carsTable">
+        <thead>
+            <tr>
+                <th>Car ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>License Plate</th>
+                <th>Availability</th>
+                <th>Daily Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch car data from the server
+        async function fetchCars() {
+            try {
+                const response = await fetch('/cars');
+                const cars = await response.json();
+                const tableBody = document.querySelector("#carsTable tbody");
+
+                // Clear existing rows
+                tableBody.innerHTML = '';
+
+                // Populate table with car data
+                cars.forEach(car => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${car.car_id}</td>
+                        <td>${car.make}</td>
+                        <td>${car.model}</td>
+                        <td>${car.year}</td>
+                        <td>${car.license_plate}</td>
+                        <td>${car.availability === 1 ? "Available" : car.availability}</td>
+                        <td>${car.daily_rate}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error fetching car data:", error);
+            }
+        }
+
+        // Load car data when the page loads
+        window.onload = fetchCars;
+    </script>
+</body>
+</html>
